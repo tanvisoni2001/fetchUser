@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Fetch User Data</title>
+</head>
+<body>
+    <h1>Information of User:</h1>
+    <form method="post" action = "{%url 'index'%}">
+        {% csrf_token %}
+        <div class = "container">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+    
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" name="firstname" required><br>
+    
+            <label for="lastname">Lastt Name:</label>
+            <input type="text" id="lastname" name="lastname" required><br>
+    
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+    
+            <label for="phone_no">Phone Number:</label>
+            <input type="tel" id="phone_no" name="phone_no" required><br>
+    
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+
+    {% if maigret_data %}
+    <h2>Maigret Data:</h2>
+    <pre style="word-wrap: break-word; white-space: pre-wrap;">
+        {{ maigret_data }}
+    </pre>    
+    {% endif %}
+
+    {% if daprofiler_data %}
+    <h2>DaProfiler Data:</h2>
+    <ul>
+        <li>Total count: {{daprofiler_data.total_count}}</li>
+        <li>
+            <ol>
+            {% for item in daprofiler_data.items%}
+              <li><pre style="word-wrap: break-word; white-space: pre-wrap;">{{item }}</pre></li>
+            {% endfor %}
+            <ol>
+        </li>
+    </ul>    
+    {% endif %}
+
+    {% if yesitsme_data %}
+    <h2>YesItsMe Data:</h2>
+    <ul>  <li>{{yesitsme_data.total_count}}</li>
+          <li>{{ yesitsme_data.items }}</li>
+    </ul>
+    {% endif %}
+</body>
+</html>
